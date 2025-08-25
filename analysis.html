@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Company Analysis – TechNova</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="logo">TechNova Analysis</div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="analysis">
+    <h1>TechNova Company Analysis</h1>
+    <p>
+      TechNova is a fictional technology company created to demonstrate data analysis.
+      The figures used here are illustrative and not drawn from a real firm.
+    </p>
+
+    <h2>Revenue & Net Income (2020–2024)</h2>
+    <canvas id="revenueChart" width="400" height="250"></canvas>
+
+    <h2>Market Share (2020–2024)</h2>
+    <canvas id="marketChart" width="400" height="250"></canvas>
+
+    <h2>Interpretation & Future Trajectory</h2>
+    <p>
+      The charts above show steady growth in revenue and net income with a compound
+      annual growth rate of roughly 20%. Market share also expanded from 3% in 2020
+      to 10% in 2024, suggesting successful product launches and market penetration.
+      If this trajectory continues, TechNova could exceed $150&nbsp;billion in revenue
+      by 2026 and achieve double‑digit market share, positioning it strongly among
+      industry leaders. However, future performance will depend on continued
+      innovation, investment in research and development and the broader economic
+      climate.
+    </p>
+  </section>
+
+  <script>
+    const years = ['2020','2021','2022','2023','2024'];
+    const revenue = [50, 65, 80, 100, 120];
+    const netIncome = [5, 7, 9, 12, 15];
+    const marketShare = [3, 5, 7, 9, 10];
+    // Revenue and Net Income chart
+    const ctx1 = document.getElementById('revenueChart').getContext('2d');
+    new Chart(ctx1, {
+      type: 'line',
+      data: {
+        labels: years,
+        datasets: [
+          {
+            label: 'Revenue ($B)',
+            data: revenue,
+            borderColor: 'rgba(75, 192, 192, 1)',
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            fill: false,
+            tension: 0.1
+          },
+          {
+            label: 'Net Income ($B)',
+            data: netIncome,
+            borderColor: 'rgba(153, 102, 255, 1)',
+            backgroundColor: 'rgba(153, 102, 255, 0.2)',
+            fill: false,
+            tension: 0.1
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            title: { display: true, text: 'Billions USD' }
+          },
+          x: {
+            title: { display: true, text: 'Year' }
+          }
+        }
+      }
+    });
+    // Market Share chart
+    const ctx2 = document.getElementById('marketChart').getContext('2d');
+    new Chart(ctx2, {
+      type: 'line',
+      data: {
+        labels: years,
+        datasets: [
+          {
+            label: 'Market Share (%)',
+            data: marketShare,
+            borderColor: 'rgba(255, 99, 132, 1)',
+            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+            fill: false,
+            tension: 0.1
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            title: { display: true, text: 'Percentage' }
+          },
+          x: {
+            title: { display: true, text: 'Year' }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
