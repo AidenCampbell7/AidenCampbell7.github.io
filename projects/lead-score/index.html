@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lead Scoring Simulator</title>
+  <!-- Base stylesheet for this mini app -->
+  <link rel="stylesheet" href="style.css" />
+  <!-- Chart.js CDN for drawing the score bar -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>Lead Scoring Simulator</h1>
+    <p>
+      Enter details about a prospective lead to see how likely they are to
+      convert. This tool demonstrates how sales teams can prioritise leads
+      using a simple scoring algorithm and data visualisation.
+    </p>
+    <form id="leadForm">
+      <label for="companySize">Company Size:</label>
+      <select id="companySize">
+        <option value="1">Small</option>
+        <option value="2">Medium</option>
+        <option value="3">Large</option>
+      </select>
+
+      <label for="budget">Budget:</label>
+      <select id="budget">
+        <option value="1">Low</option>
+        <option value="2">Medium</option>
+        <option value="3">High</option>
+      </select>
+
+      <label for="timeframe">Decision Timeframe:</label>
+      <select id="timeframe">
+        <option value="3">Immediate</option>
+        <option value="2">Soon</option>
+        <option value="1">Later</option>
+      </select>
+
+      <label for="interest">Interest Level (1\u2013 10):</label>
+      <input type="number" id="interest" min="1" max="10" value="5" required />
+
+      <button type="submit">Score Lead</button>
+    </form>
+
+    <div id="result" class="result"></div>
+    <canvas id="scoreChart" width="400" height="200"></canvas>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
