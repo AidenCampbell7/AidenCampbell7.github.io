@@ -1,0 +1,57 @@
+body {
+  /* Match the site's typography and colours */
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  background-color: #f5f7fa;
+  margin: 0;
+  padding: 20px;
+}
+
+.container {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 24px;
+  max-width: 960px;
+  margin: 40px auto;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  margin-top: 0;
+  color: #2c3e50;
+  text-align: center;
+}
+
+#chart-container {
+  margin: 30px 0;
+}
+
+#sentimentChart {
+  max-width: 100%;
+  height: 300px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #f5f5f5;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.note {
+  font-size: 0.9em;
+  color: #555;
+  margin-top: 20px;
+}
