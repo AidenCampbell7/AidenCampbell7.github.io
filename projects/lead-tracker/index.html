@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lead Tracker</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="container">
+      <h1>Lead Tracker</h1>
+      <p class="description">
+        Organise your sales prospects by stage. Add a new lead below and drag
+        it into the appropriate column to visualise your pipeline.
+      </p>
+      <form id="addLeadForm" class="add-lead-form">
+        <input
+          type="text"
+          id="leadName"
+          placeholder="Enter lead name"
+          required
+        />
+        <button type="submit">Add Lead</button>
+      </form>
+      <div class="board">
+        <div class="column" id="new">
+          <h2>New Leads</h2>
+          <div class="list" id="newList"></div>
+        </div>
+        <div class="column" id="contacted">
+          <h2>Contacted</h2>
+          <div class="list" id="contactedList"></div>
+        </div>
+        <div class="column" id="qualified">
+          <h2>Qualified</h2>
+          <div class="list" id="qualifiedList"></div>
+        </div>
+      </div>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>

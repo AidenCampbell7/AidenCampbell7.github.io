@@ -1,0 +1,38 @@
+/*
+ * Styles for the Cyberpunk Runner game.  This file sets up a full‑screen
+ * canvas, a neon‑themed scoreboard overlay and ensures that nothing
+ * on the page scrolls.  The dark radial gradient background echoes a
+ * futuristic cityscape while the cyan glow ties into the neon lighting
+ * in the 3D scene.
+ */
+
+html, body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  font-family: 'Segoe UI', sans-serif;
+  /* Subtle radial gradient for a cyberpunk feel */
+  background: radial-gradient(circle at center, #080015, #01000f);
+  color: #fff;
+}
+
+/* Container for the WebGL canvas */
+#game-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* Scoreboard overlay */
+#scoreboard {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 1.2rem;
+  color: #0ff;
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: 10px 15px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px #0ff;
+  pointer-events: none; /* Allow clicks to fall through to the canvas */
+}

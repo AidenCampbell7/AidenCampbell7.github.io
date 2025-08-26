@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SoundHound Company Analysis</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      .analysis-container {
+        max-width: 960px;
+        margin: 40px auto;
+        background: #fff;
+        padding: 20px 30px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+      th,
+      td {
+        padding: 8px;
+        border: 1px solid #ddd;
+        text-align: center;
+      }
+      th {
+        background-color: #f0f0f0;
+      }
+      .charts {
+        margin-top: 30px;
+      }
+      .chart-wrapper {
+        margin-bottom: 40px;
+      }
+      .interpretation {
+        margin-top: 30px;
+        line-height: 1.6;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="analysis-container">
+      <h1>SoundHound AI Company Analysis</h1>
+      <p>
+        SoundHound AI, Inc. develops voice and conversational AI technologies used
+        across automotive, restaurant, retail, financial and healthcare industries.
+        Following its public listing via a SPAC in 2021, the company has focused
+        on expanding its customer base and product offerings, leading to rapid
+        revenue growth but widening losses as it invests in scaling its platform.
+      </p>
+
+      <h2>Data Summary</h2>
+      <p>
+        The table below summarises SoundHound’s revenue and net income for
+        the last four fiscal years. All figures are in U.S. dollars
+        (millions).
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Year</th>
+            <th>Revenue</th>
+            <th>Net Income (Loss)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>2021</td><td>21</td><td>-80</td></tr>
+          <tr><td>2022</td><td>31</td><td>-117</td></tr>
+          <tr><td>2023</td><td>46</td><td>-92</td></tr>
+          <tr><td>2024</td><td>85</td><td>-351</td></tr>
+        </tbody>
+      </table>
+
+      <div class="charts">
+        <div class="chart-wrapper">
+          <h3>Revenue Growth</h3>
+          <canvas id="revenueChart"></canvas>
+        </div>
+        <div class="chart-wrapper">
+          <h3>Net Income Trend</h3>
+          <canvas id="netChart"></canvas>
+        </div>
+      </div>
+
+      <div class="interpretation">
+        <h2>Interpretation &amp; Trajectory</h2>
+        <p>
+          Revenue growth has been the standout story for SoundHound. Over
+          just four years the company’s top line expanded from
+          $21&nbsp;million to $85&nbsp;million【492361367428869†L36-L50】—an
+          85 % year‑over‑year jump in 2024 alone【934551458828044†L69-L75】. This
+          acceleration reflects a rapidly growing customer base across
+          quick‑service restaurants, automotive partnerships and other
+          verticals【934551458828044†L69-L116】.
+        </p>
+        <p>
+          The flip side of that growth is heavy investment: net losses widened
+          to $351 million in 2024【999838968127307†L34-L50】 as SoundHound spent
+          aggressively on research, development and go‑to‑market expansion.
+          Profitability is unlikely in the immediate term, but sustained
+          revenue growth suggests significant market opportunity if the
+          company can achieve operating leverage.
+        </p>
+        <p>
+          The linear forecast projects revenues crossing roughly
+          $120&nbsp;million by 2026. This simple extrapolation should be
+          interpreted cautiously: it assumes steady growth and does not
+          incorporate competitive dynamics or macroeconomic changes. For
+          tech‑sales teams, the takeaway is that SoundHound’s rapid top‑line
+          expansion offers a compelling narrative for potential partners and
+          customers, but close attention should be paid to margins and
+          operating efficiency in future earnings reports.
+        </p>
+      </div>
+    </div>
+    <script>
+      // Data for charts
+      const years = [2021, 2022, 2023, 2024];
+      const revenue = [21, 31, 46, 85];
+      const netIncome = [-80, -117, -92, -351];
+
+      // Revenue chart
+      const revCtx = document.getElementById('revenueChart').getContext('2d');
+      new Chart(revCtx, {
+        type: 'line',
+        data: {
+          labels: years,
+          datasets: [
+            {
+              label: 'Revenue',
+              data: revenue,
+              borderColor: '#007bff',
+              backgroundColor: 'rgba(0, 123, 255, 0.2)',
+              fill: false,
+              tension: 0.1
+            }
+          ]
+        },
+        options: {
+          plugins: {
+            title: {
+              display: true,
+              text: 'SoundHound AI Revenue by Year'
+            },
+            legend: {
+              position: 'bottom'
+            }
+          },
+          scales: {
+            x: {
+              title: {
+                display: true,
+                text: 'Year'
+              }
+            },
+            y: {
+              title: {
+                display: true,
+                text: 'Revenue (USD millions)'
+              },
+              beginAtZero: false
+            }
+          }
+        }
+      });
+
+      // Net income chart
+      const netCtx = document.getElementById('netChart').getContext('2d');
+      new Chart(netCtx, {
+        type: 'bar',
+        data: {
+          labels: years,
+          datasets: [
+            {
+              label: 'Net Income',
+              data: netIncome,
+              backgroundColor: netIncome.map((val) => (val < 0 ? 'rgba(220, 53, 69, 0.7)' : 'rgba(40, 167, 69, 0.7)')),
+              borderColor: netIncome.map((val) => (val < 0 ? 'rgba(220, 53, 69, 1)' : 'rgba(40, 167, 69, 1)')),
+              borderWidth: 1
+            }
+          ]
+        },
+        options: {
+          plugins: {
+            title: {
+              display: true,
+              text: 'SoundHound AI Net Income (Loss) by Year'
+            },
+            legend: {
+              display: false
+            }
+          },
+          scales: {
+            x: {
+              title: {
+                display: true,
+                text: 'Year'
+              }
+            },
+            y: {
+              title: {
+                display: true,
+                text: 'Net Income (USD millions)'
+              },
+              beginAtZero: false
+            }
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

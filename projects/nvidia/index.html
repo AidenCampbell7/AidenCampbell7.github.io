@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NVIDIA Growth Analysis</title>
+  <!-- Shared site styles for typography and colours -->
+  <link rel="stylesheet" href="../../style.css" />
+  <!-- Local styles for tables and charts -->
+  <link rel="stylesheet" href="style.css" />
+  <!-- Chart.js library for data visualisation -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>NVIDIA Growth Analysis</h1>
+    <p>
+      NVIDIA Corporation (NVDA) is a leader in graphics processing units and
+      system‑on‑a‑chip technology. Its GPUs power gaming, professional
+      visualisation, autonomous vehicles and increasingly the data centres
+      underpinning generative AI. In recent years NVIDIA has become a
+      critical enabler of the artificial intelligence boom.
+    </p>
+    <h2>Financial Snapshot</h2>
+    <p>
+      The table below summarises NVIDIA’s annual revenue over the past five
+      years. The company’s revenue has grown dramatically, especially from
+      2023 to 2025, when demand for AI hardware surged.
+    </p>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Year</th>
+          <th>Revenue (Billion USD)</th>
+          <th>Year‑on‑Year Growth</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>2021</td><td>16.675</td><td>52.7%</td></tr>
+        <tr><td>2022</td><td>26.914</td><td>61.4%</td></tr>
+        <tr><td>2023</td><td>26.974</td><td>0.2%</td></tr>
+        <tr><td>2024</td><td>60.922</td><td>125.9%</td></tr>
+        <tr><td>2025</td><td>130.497</td><td>114.2%</td></tr>
+      </tbody>
+    </table>
+    <p class="small-note">
+      Revenue data from MacroTrends【403356823960948†L32-L39】. Growth rates are
+      calculated relative to the previous year. All values are in billions
+      of U.S. dollars.
+    </p>
+    <div class="chart-section">
+      <canvas id="revenueChart" aria-label="NVIDIA revenue chart" role="img"></canvas>
+    </div>
+    <h2>Stock Price and Future Projections</h2>
+    <p>
+      NVIDIA’s meteoric rise in market value reflects both explosive revenue
+      growth and investor expectations that AI will dominate the coming
+      decade. The chart below illustrates an approximate trajectory of
+      NVIDIA’s stock price alongside projected revenue through 2027.
+    </p>
+    <div class="chart-section">
+      <canvas id="stockChart" aria-label="NVIDIA stock price chart" role="img"></canvas>
+    </div>
+    <p>
+      <strong>Interpretation:</strong> NVIDIA’s revenue jumped from $26.9 B in
+      2023 to $60.9 B in 2024 and is estimated at $130.5 B in 2025—an
+      increase of over 114% year‑on‑year【403356823960948†L32-L39】. This explosive
+      growth is tied to soaring demand for AI accelerators. If the current
+      trajectory continues, revenue could surpass $200 B by 2027. The stock
+      price, represented here illustratively, mirrors this optimism but is
+      prone to volatility as investors weigh competition and supply‑chain
+      risks. Overall, NVIDIA sits at the centre of a rapidly expanding AI
+      ecosystem and remains a bellwether for the broader technology sector.
+    </p>
+  </div>
+  <!-- Local script draws the charts and forecast lines -->
+  <script src="script.js"></script>
+</body>
+</html>

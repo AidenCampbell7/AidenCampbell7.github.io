@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyberpunk Runner</title>
+    <!-- Reuse the root styles for consistent typography and colours -->
+    <link rel="stylesheet" href="../../style.css">
+    <!-- Local styles for the game layout and neon overlay -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-container">
+        <!-- This element displays the current score and game over messages -->
+        <div id="scoreboard"></div>
+    </div>
+    <!-- Load the Three.js library from a CDN. A specific version is pinned to ensure stability. -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.152.0/build/three.min.js"></script>
+    <!-- The game logic lives in this file -->
+    <script src="script.js"></script>
+</body>
+</html>
