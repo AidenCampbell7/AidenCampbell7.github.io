@@ -1,0 +1,67 @@
+/*
+ * Styles for the Feature Prioritization Tool.  The form is laid out in a
+ * responsive grid, and the table is styled with subtle borders and shading
+ * for readability.  Button colours mirror the site’s primary palette.
+ */
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.form-grid input {
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.form-grid button {
+  padding: 8px 12px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.form-grid button:hover {
+  background-color: #0069d9;
+}
+
+#featureTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  font-size: 0.9rem;
+}
+
+#featureTable th,
+#featureTable td {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 8px 10px;
+  text-align: center;
+}
+
+#featureTable th {
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+#featureTable tbody tr:nth-child(odd) {
+  background-color: #fafafa;
+}
+
+.chart-section {
+  margin-top: 30px;
+  height: 400px;
+}
