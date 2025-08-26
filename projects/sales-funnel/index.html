@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sales Funnel Analyzer</title>
+    <link rel="stylesheet" href="style.css" />
+    <!-- Load Chart.js from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Sales Funnel Analyzer</h1>
+      <p>
+        Model your sales funnel, calculate conversion rates and estimate revenue.
+        Enter the number of prospects at each stage along with the average deal
+        value to discover where your pipeline loses the most opportunities.
+      </p>
+      <div class="form-controls">
+        <label>
+          Leads (top‑of‑funnel)
+          <input type="number" id="leads" min="0" value="100" />
+        </label>
+        <label>
+          Qualified leads
+          <input type="number" id="qualified" min="0" value="60" />
+        </label>
+        <label>
+          Proposals
+          <input type="number" id="proposals" min="0" value="30" />
+        </label>
+        <label>
+          Deals
+          <input type="number" id="deals" min="0" value="15" />
+        </label>
+        <label>
+          Average deal value ($)
+          <input type="number" id="dealValue" min="0" step="100" value="1000" />
+        </label>
+        <button id="analyzeBtn">Analyze</button>
+      </div>
+      <canvas id="funnelChart"></canvas>
+      <div id="summary" class="summary"></div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
