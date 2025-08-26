@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Customer Segmentation Explorer</title>
+    <link rel="stylesheet" href="style.css" />
+    <!-- Load Chart.js from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Customer Segmentation Explorer</h1>
+      <p>
+        Segment customers into clusters based on age and annual revenue. Choose
+        the number of clusters below and click <strong>Run Clustering</strong>
+        to visualise the segmentation. This tool uses the K‑means algorithm
+        implemented in vanilla JavaScript and demonstrates how unsupervised
+        learning can reveal meaningful customer groups for targeted marketing
+        and sales strategies.
+      </p>
+      <div class="controls">
+        <label for="numClusters">Number of clusters (2–5): </label>
+        <input type="number" id="numClusters" min="2" max="5" value="3" />
+        <button id="clusterBtn">Run Clustering</button>
+      </div>
+      <canvas id="segmentationChart"></canvas>
+      <div id="summary"></div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
