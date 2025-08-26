@@ -1,119 +1,208 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Company Analysis – TechNova</title>
-  <link rel="stylesheet" href="style.css" />
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-<body>
-  <header>
-    <nav class="navbar">
-      <div class="logo">TechNova Analysis</div>
-      <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-      </ul>
-    </nav>
-  </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SoundHound Company Analysis</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      .analysis-container {
+        max-width: 960px;
+        margin: 40px auto;
+        background: #fff;
+        padding: 20px 30px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+      th,
+      td {
+        padding: 8px;
+        border: 1px solid #ddd;
+        text-align: center;
+      }
+      th {
+        background-color: #f0f0f0;
+      }
+      .charts {
+        margin-top: 30px;
+      }
+      .chart-wrapper {
+        margin-bottom: 40px;
+      }
+      .interpretation {
+        margin-top: 30px;
+        line-height: 1.6;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="analysis-container">
+      <h1>SoundHound AI Company Analysis</h1>
+      <p>
+        SoundHound AI, Inc. develops voice and conversational AI technologies used
+        across automotive, restaurant, retail, financial and healthcare industries.
+        Following its public listing via a SPAC in 2021, the company has focused
+        on expanding its customer base and product offerings, leading to rapid
+        revenue growth but widening losses as it invests in scaling its platform.
+      </p>
 
-  <section class="analysis">
-    <h1>TechNova Company Analysis</h1>
-    <p>
-      TechNova is a fictional technology company created to demonstrate data analysis.
-      The figures used here are illustrative and not drawn from a real firm.
-    </p>
+      <h2>Financial Overview</h2>
+      <p>All figures below are in U.S. dollars (millions).</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Year</th>
+            <th>Revenue</th>
+            <th>Net Income (Loss)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>2021</td><td>21</td><td>-80</td></tr>
+          <tr><td>2022</td><td>31</td><td>-117</td></tr>
+          <tr><td>2023</td><td>46</td><td>-92</td></tr>
+          <tr><td>2024</td><td>85</td><td>-351</td></tr>
+        </tbody>
+      </table>
 
-    <h2>Revenue & Net Income (2020–2024)</h2>
-    <canvas id="revenueChart" width="400" height="250"></canvas>
+      <div class="charts">
+        <div class="chart-wrapper">
+          <h3>Revenue Growth</h3>
+          <canvas id="revenueChart"></canvas>
+        </div>
+        <div class="chart-wrapper">
+          <h3>Net Income Trend</h3>
+          <canvas id="netChart"></canvas>
+        </div>
+      </div>
 
-    <h2>Market Share (2020–2024)</h2>
-    <canvas id="marketChart" width="400" height="250"></canvas>
+      <div class="interpretation">
+        <h2>Interpretation &amp; Trajectory</h2>
+        <p>
+          SoundHound’s revenue has accelerated sharply, increasing more than
+          fourfold from 2021 to 2024【492361367428869†L36-L50】. The company
+          credits this growth to diversification across quick‑service restaurants,
+          automotive partnerships and other verticals【934551458828044†L69-L116】. In
+          2024 alone, revenue rose 85% year‑over‑year to $84.7 million【934551458828044†L69-L75】.
+        </p>
+        <p>
+          However, net losses have also widened, reaching $351 million in 2024【999838968127307†L34-L50】.
+          This reflects heavy investment in R&amp;D and sales expansion. The company’s
+          strategy suggests that profitability may remain elusive in the near
+          term, but the strong revenue trajectory hints at significant market
+          opportunity. If SoundHound can continue to grow revenues while
+          improving gross margin and controlling costs, losses may narrow over
+          the next few years.
+        </p>
+        <p>
+          Forecasts based on linear extrapolation of past revenue suggest the
+          company could cross $120 million in revenue by 2026. Nonetheless, such
+          projections assume consistent growth and do not account for market or
+          competitive risks. Investors and potential partners should monitor
+          quarterly updates for signs of operating leverage and margin
+          improvement.
+        </p>
+      </div>
+    </div>
+    <script>
+      // Data for charts
+      const years = [2021, 2022, 2023, 2024];
+      const revenue = [21, 31, 46, 85];
+      const netIncome = [-80, -117, -92, -351];
 
-    <h2>Interpretation & Future Trajectory</h2>
-    <p>
-      The charts above show steady growth in revenue and net income with a compound
-      annual growth rate of roughly 20%. Market share also expanded from 3% in 2020
-      to 10% in 2024, suggesting successful product launches and market penetration.
-      If this trajectory continues, TechNova could exceed $150&nbsp;billion in revenue
-      by 2026 and achieve double‑digit market share, positioning it strongly among
-      industry leaders. However, future performance will depend on continued
-      innovation, investment in research and development and the broader economic
-      climate.
-    </p>
-  </section>
-
-  <script>
-    const years = ['2020','2021','2022','2023','2024'];
-    const revenue = [50, 65, 80, 100, 120];
-    const netIncome = [5, 7, 9, 12, 15];
-    const marketShare = [3, 5, 7, 9, 10];
-    // Revenue and Net Income chart
-    const ctx1 = document.getElementById('revenueChart').getContext('2d');
-    new Chart(ctx1, {
-      type: 'line',
-      data: {
-        labels: years,
-        datasets: [
-          {
-            label: 'Revenue ($B)',
-            data: revenue,
-            borderColor: 'rgba(75, 192, 192, 1)',
-            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-            fill: false,
-            tension: 0.1
+      // Revenue chart
+      const revCtx = document.getElementById('revenueChart').getContext('2d');
+      new Chart(revCtx, {
+        type: 'line',
+        data: {
+          labels: years,
+          datasets: [
+            {
+              label: 'Revenue',
+              data: revenue,
+              borderColor: '#007bff',
+              backgroundColor: 'rgba(0, 123, 255, 0.2)',
+              fill: false,
+              tension: 0.1
+            }
+          ]
+        },
+        options: {
+          plugins: {
+            title: {
+              display: true,
+              text: 'SoundHound AI Revenue by Year'
+            },
+            legend: {
+              position: 'bottom'
+            }
           },
-          {
-            label: 'Net Income ($B)',
-            data: netIncome,
-            borderColor: 'rgba(153, 102, 255, 1)',
-            backgroundColor: 'rgba(153, 102, 255, 0.2)',
-            fill: false,
-            tension: 0.1
-          }
-        ]
-      },
-      options: {
-        responsive: true,
-        scales: {
-          y: {
-            title: { display: true, text: 'Billions USD' }
-          },
-          x: {
-            title: { display: true, text: 'Year' }
+          scales: {
+            x: {
+              title: {
+                display: true,
+                text: 'Year'
+              }
+            },
+            y: {
+              title: {
+                display: true,
+                text: 'Revenue (USD millions)'
+              },
+              beginAtZero: false
+            }
           }
         }
-      }
-    });
-    // Market Share chart
-    const ctx2 = document.getElementById('marketChart').getContext('2d');
-    new Chart(ctx2, {
-      type: 'line',
-      data: {
-        labels: years,
-        datasets: [
-          {
-            label: 'Market Share (%)',
-            data: marketShare,
-            borderColor: 'rgba(255, 99, 132, 1)',
-            backgroundColor: 'rgba(255, 99, 132, 0.2)',
-            fill: false,
-            tension: 0.1
-          }
-        ]
-      },
-      options: {
-        responsive: true,
-        scales: {
-          y: {
-            title: { display: true, text: 'Percentage' }
+      });
+
+      // Net income chart
+      const netCtx = document.getElementById('netChart').getContext('2d');
+      new Chart(netCtx, {
+        type: 'bar',
+        data: {
+          labels: years,
+          datasets: [
+            {
+              label: 'Net Income',
+              data: netIncome,
+              backgroundColor: netIncome.map((val) => (val < 0 ? 'rgba(220, 53, 69, 0.7)' : 'rgba(40, 167, 69, 0.7)')),
+              borderColor: netIncome.map((val) => (val < 0 ? 'rgba(220, 53, 69, 1)' : 'rgba(40, 167, 69, 1)')),
+              borderWidth: 1
+            }
+          ]
+        },
+        options: {
+          plugins: {
+            title: {
+              display: true,
+              text: 'SoundHound AI Net Income (Loss) by Year'
+            },
+            legend: {
+              display: false
+            }
           },
-          x: {
-            title: { display: true, text: 'Year' }
+          scales: {
+            x: {
+              title: {
+                display: true,
+                text: 'Year'
+              }
+            },
+            y: {
+              title: {
+                display: true,
+                text: 'Net Income (USD millions)'
+              },
+              beginAtZero: false
+            }
           }
         }
-      }
-    });
-  </script>
-</body>
+      });
+    </script>
+  </body>
 </html>
