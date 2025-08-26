@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Feature Prioritization Tool</title>
+  <!-- Use the root stylesheet for consistent typography and base colours -->
+  <link rel="stylesheet" href="../../style.css" />
+  <!-- Local styles for the form, table and chart -->
+  <link rel="stylesheet" href="style.css" />
+  <!-- Load Chart.js for visualising RICE scores -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>Feature Prioritization Tool</h1>
+    <p>
+      Use the RICE scoring model (Reach × Impact × Confidence ÷ Effort) to
+      objectively prioritise features or product initiatives. Add your
+      proposals with their estimated reach, impact, confidence and effort,
+      and this tool will rank them automatically and visualise the results.
+    </p>
+    <form id="featureForm" class="form-grid">
+      <input type="text" id="featureName" placeholder="Feature name" required />
+      <input type="number" id="reach" placeholder="Reach (1–1000)" min="1" value="500" required />
+      <input type="number" id="impact" placeholder="Impact (1–5)" min="1" max="5" step="0.1" value="3" required />
+      <input type="number" id="confidence" placeholder="Confidence (0–1)" min="0" max="1" step="0.05" value="0.8" required />
+      <input type="number" id="effort" placeholder="Effort (person‑months)" min="0.1" step="0.1" value="1" required />
+      <button type="submit">Add Feature</button>
+    </form>
+    <table id="featureTable">
+      <thead>
+        <tr>
+          <th>Feature</th>
+          <th>Reach</th>
+          <th>Impact</th>
+          <th>Confidence</th>
+          <th>Effort</th>
+          <th>RICE Score</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <div class="chart-section">
+      <canvas id="riceChart" aria-label="RICE scores" role="img"></canvas>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
+  
