@@ -1,41 +1,94 @@
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f9f9f9;
-  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  background-color: #f5f7fa;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.container {
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
 }
 
 h1 {
   margin-bottom: 10px;
 }
 
-p {
-  margin-bottom: 15px;
+.instructions {
+  color: #555;
+  margin-bottom: 20px;
 }
 
-input {
+.input-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.input-row input {
+  flex: 1;
   padding: 10px;
-  font-size: 16px;
-  width: 150px;
   border: 1px solid #ccc;
-  border-radius: 3px;
+  border-radius: 4px;
 }
 
-button {
-  padding: 10px 15px;
-  font-size: 16px;
-  margin-left: 10px;
-  cursor: pointer;
+.input-row button {
+  padding: 10px 20px;
   background-color: #2980b9;
-  color: white;
+  color: #fff;
   border: none;
-  border-radius: 3px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
-button:hover {
+.input-row button:hover {
   background-color: #1f6391;
 }
 
-#feedback {
-  margin-top: 20px;
+.progress-wrapper {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  gap: 10px;
+}
+
+.progress-bar {
+  flex: 1;
+  height: 8px;
+  background-color: #ecf0f1;
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-bar::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 0%;
+  background-color: #2980b9;
+  transition: width 0.3s ease;
+}
+
+#attempts {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.feedback {
   font-weight: bold;
+  margin-top: 10px;
+  min-height: 24px;
 }
