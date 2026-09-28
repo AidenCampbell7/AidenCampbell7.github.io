@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>authwatch &mdash; Aiden Campbell</title>
+  <meta name="description" content="SSH authentication log analysis and detection engine. Python, FastAPI, SQLite." />
+  <link rel="stylesheet" href="../../style.css" />
+</head>
+<body>
+
+<header>
+  <nav class="navbar">
+    <div class="logo">Aiden Campbell</div>
+    <ul class="nav-links">
+      <li><a href="../../index.html#security">Security</a></li>
+      <li><a href="../../index.html#software">Software</a></li>
+      <li><a href="../../index.html#resume">Resume</a></li>
+      <li><a href="../../index.html#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div class="wrap doc">
+
+  <a class="back" href="../../index.html">&larr; back</a>
+
+  <h1>authwatch</h1>
+  <p class="tagline">SSH authentication log analysis and detection engine</p>
+
+  <div class="stack">
+    <span>Python</span><span>FastAPI</span><span>SQLite</span><span>pytest</span><span>GitHub Actions</span>
+  </div>
+
+  <div class="links" style="margin-bottom:26px">
+    <a href="https://github.com/aidencampbell7/authwatch">Source on GitHub &rarr;</a>
+  </div>
+
+  <h2>The problem</h2>
+  <p>
+    An <code>auth.log</code> on a modestly busy server accumulates thousands of lines a day.
+    Almost all of it is noise. Buried in it are the handful of events that matter: a machine
+    working through passwords, someone testing one password against every account on the box,
+    a credential being used from somewhere it has never been used before.
+  </p>
+  <p>
+    authwatch reads the log and answers one question — what in here deserves a human's
+    attention?
+  </p>
+
+  <h2>Architecture</h2>
+  <p>
+    Four modules, one responsibility each. The separation is the point: detection rules are
+    pure functions, so they can be tested without a database, a web server, or a log file.
+  </p>
+  <ul>
+    <li><code>parser.py</code> — the only code that knows log line formats. Emits normalized event records.</li>
+    <li><code>detections.py</code> — pure functions. Events in, alerts out. No I/O, no printing, no database.</li>
+    <li><code>store.py</code> — SQLite persistence and queries.</li>
+    <li><code>api.py</code> / <code>cli.py</code> — two thin interfaces over the same store.</li>
+  </ul>
+  <p>
+    Supporting a new log source — Windows Event Log, CloudTrail — means writing a new parser,
+    not touching a single detection rule.
+  </p>
+
+  <h2>The rules</h2>
+  <table class="rules">
+    <thead>
+      <tr><th>Rule</th><th>Severity</th><th>What it catches</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>brute_force</td><td>High</td>
+        <td>One IP, one account, N failures inside a sliding window.</td>
+      </tr>
+      <tr>
+        <td>password_spray</td><td>High</td>
+        <td>One IP, many <em>distinct</em> accounts, few attempts each.</td>
+      </tr>
+      <tr>
+        <td>off_hours_success</td><td>Medium</td>
+        <td>A successful login outside business hours.</td>
+      </tr>
+      <tr>
+        <td>new_ip_success</td><td>Medium</td>
+        <td>First successful auth from an IP with no prior success history.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Why spray needs its own rule</h3>
+  <p>
+    Brute force counts failures per account. An attacker who tries two passwords against
+    eighty accounts never trips that counter — no single account sees enough failures, which
+    is precisely why the technique works against lockout policies. Spray detection counts
+    distinct usernames per source IP instead. Same data, inverted shape.
+  </p>
+
+  <h3>Why the sliding window is a deque</h3>
+  <p>
+    Each <code>(ip, user)</code> pair gets a deque of failure timestamps. Push each new failure,
+    pop from the left while the oldest entry falls outside the window, and the window length
+    is the deque length. Every event is pushed and popped at most once, so the pass is linear.
+    The naive alternative — rescanning prior events for each new one — is quadratic and falls
+    over on a real log.
+  </p>
+
+  <h2>The bug worth writing down</h2>
+  <div class="callout">
+    <p>
+      The first version of <code>new_ip_success</code> fired on everything. Three of five alerts
+      against the test data were false positives — office IPs flagged as suspicious.
+    </p>
+  </div>
+  <p>
+    The cause: the baseline of known IPs was being built from the same window being analyzed.
+    On a first run, no IP has any history, so every IP looks new. The rule was technically
+    working and practically useless.
+  </p>
+  <p>
+    The fix was a warm-up period. Events inside the first twelve hours of the log build the
+    baseline without raising alerts. Two details make the rule behave now:
+  </p>
+  <ul>
+    <li>The baseline is built in timestamp order, so an IP counts as known only from <em>earlier</em> events. Building it from the whole file first means every IP looks known and the rule silently never fires — the same bug in the opposite direction.</li>
+    <li>The warm-up window suppresses the cold-start noise.</li>
+  </ul>
+  <p>
+    After the fix, the only <code>new_ip_success</code> alert remaining on the test data was the
+    genuine one — and it shared a timestamp with an off-hours alert.
+  </p>
+
+  <h2>What the output actually says</h2>
+  <p>
+    On the test log, the two HIGH alerts are failed attacks: loud, obvious, unsuccessful. The
+    attacker never got in.
+  </p>
+  <p>
+    The two MEDIUM alerts share a timestamp and an IP. A <em>successful</em> login, outside
+    business hours, from an address that had never authenticated before. Neither rule rates
+    that high on its own.
+  </p>
+  <div class="callout">
+    <p>
+      Severity on any single rule tells you less than correlation across rules. The finding
+      worth investigating was never the highest-severity line.
+    </p>
+  </div>
+
+  <h2>Testing</h2>
+  <p>
+    36 tests, running in about a tenth of a second — the payoff for keeping detection logic
+    free of I/O. The interesting cases are the negative ones, verifying that rules stay
+    <em>quiet</em> when they should:
+  </p>
+  <ul>
+    <li>failures spread beyond the window do not trip brute force</li>
+    <li>failures split across two accounts, or two IPs, do not combine into one alert</li>
+    <li>fifty attempts against a single account do not register as a spray</li>
+    <li>a failed 3am login does not trip the off-hours rule — that is brute force's job</li>
+    <li>every IP inside the warm-up window stays suppressed</li>
+  </ul>
+  <p>
+    A rule that fires on everything is as useless as one that never fires. False-positive
+    behavior is where detection logic actually breaks, so that is where the tests are.
+  </p>
+
+  <h2>Known limitations</h2>
+  <ul>
+    <li>The IP baseline lives in a single file rather than persisting across runs. <code>store.py</code> is positioned to hold it; that is the next change.</li>
+    <li>One log source — OpenSSH syslog format. The parser boundary is where a second would plug in.</li>
+    <li>Rules are independent. A correlation layer — brute force followed by a success from the same IP — would be higher-signal than any rule alone.</li>
+    <li>No suppression or tuning workflow, so a noisy rule stays noisy.</li>
+  </ul>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    <span>&copy; 2026 Aiden Campbell</span>
+    <span>Columbia, SC</span>
+  </div>
+</footer>
+
+</body>
+</html>

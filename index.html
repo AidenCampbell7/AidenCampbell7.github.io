@@ -1,206 +1,285 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Aiden Campbell – Resume &amp; Projects</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <header>
-      <nav class="navbar">
-        <div class="logo">Aiden&nbsp;Campbell</div>
-        <ul class="nav-links">
-          <li><a href="#about">About</a></li>
-          <li><a href="#projects">Projects</a></li>
-        <li><a href="#resume">Resume</a></li>
-        <!-- Link to the standalone company analysis page -->
-        <li><a href="analysis.html">Analysis</a></li>
-        <li><a href="#contact">Contact</a></li>
-        </ul>
-      </nav>
-    </header>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aiden Campbell</title>
+  <meta name="description" content="Computer Science student at the University of South Carolina. CompTIA Security+ certified. Builds security tooling and data applications." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
 
-    <section id="about" class="about">
-      <h1>About Me</h1>
+<header>
+  <nav class="navbar">
+    <div class="logo">Aiden Campbell</div>
+    <ul class="nav-links">
+      <li><a href="#security">Security</a></li>
+      <li><a href="#software">Software</a></li>
+      <li><a href="#resume">Resume</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div class="wrap">
+
+  <section class="hero">
+    <h1>Computer Science student building security tooling and data applications.</h1>
+    <p class="lede">
+      Senior at the University of South Carolina, CompTIA Security+ certified, with two
+      years of hands-on IT support across a 1,000-user campus. I work in two directions:
+      detection and log analysis on the security side, and data tools on the software side.
+    </p>
+    <div class="badges">
+      <span class="badge cert">CompTIA Security+</span>
+      <span class="badge">Python</span>
+      <span class="badge">Java</span>
+      <span class="badge">JavaScript</span>
+      <span class="badge">C++</span>
+      <span class="badge">SQL</span>
+    </div>
+    <div class="hero-links">
+      <a class="btn primary" href="#security">See the work</a>
+      <a class="btn ghost" href="https://github.com/aidencampbell7">GitHub</a>
+    </div>
+  </section>
+
+  <!-- ================= SECURITY ================= -->
+  <section id="security">
+    <div class="section-head">
+      <span class="eyebrow sec">Track 01 — Security</span>
+      <h2>Detection engineering and log analysis</h2>
       <p>
-        Hi! I'm Aiden Campbell, a Computer Science major at the University of
-        South Carolina (Class of 2027). I'm passionate about connecting people
-        with technology and am actively seeking an internship where I can combine technical know‑how with strong
-        interpersonal skills.
+        Security+ certified in July 2026. The work below is where the certification
+        turns into something running.
       </p>
-    </section>
+    </div>
 
-    <section id="projects" class="projects">
-      <h2>Projects</h2>
-      <!-- Music app moved near the bottom of the project list. A lightweight page will be added under projects/music-app for now. -->
+    <div class="featured">
+      <h3>authwatch</h3>
+      <p class="tagline">SSH authentication log analysis and detection engine</p>
 
-      <!-- NVIDIA Growth Analysis project showcasing financial research and projections -->
-      <div class="project">
-        <h3>NVIDIA Growth Analysis</h3>
-        <p>
-          An extensive data‑driven report on NVIDIA’s meteoric rise in the AI era.
-          This page combines authoritative financial data and market commentary
-          with interactive charts of revenue growth and stock‑price trajectories.
-          It also projects future performance based on historical trends and
-          discusses the factors propelling NVIDIA’s valuation beyond $4 trillion.
-        </p>
-        <a href="projects/nvidia/index.html" class="project-link">Explore NVIDIA insights</a>
+      <p>
+        Parses raw <code>auth.log</code> files into structured events, runs four detection
+        rules against them, and stores findings in SQLite behind a REST API and dashboard.
+        Built to answer one question: given a log nobody has time to read, what in it
+        actually deserves a human's attention?
+      </p>
+
+      <div class="terminal">
+$ python -m authwatch ingest data/auth.log<br />
+<span class="dim">Parsed  83 events from data/auth.log</span><br />
+<span class="dim">Stored  83 new events, 5 new alerts</span><br /><br />
+<span class="hi">[HIGH  ]</span> brute_force&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10 failed logins for 'root' from 203.0.113.42 within 10 minutes<br />
+<span class="hi">[HIGH  ]</span> password_spray&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;198.51.100.7 attempted 5 distinct accounts within 30 minutes<br />
+<span class="md">[MEDIUM]</span> off_hours_success&nbsp;&nbsp;Successful login for 'aiden' at 21:06<br />
+<span class="md">[MEDIUM]</span> new_ip_success&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;First success from previously unseen IP 45.77.201.9
       </div>
 
-      <!-- Company Analysis (SoundHound) showcasing data visualisation skills -->
-      <div class="project">
-        <h3>Company Analysis</h3>
-        <p>
-          An in‑depth analysis of a technology company, presented with interactive
-          charts and future trajectory forecasting. This project demonstrates how
-          to collect and visualise data using JavaScript and Chart.js.
-        </p>
-        <a href="analysis.html" class="project-link">Read analysis</a>
+      <p>
+        The two HIGH alerts are failed attacks. The two MEDIUM alerts share a timestamp and
+        an IP — a successful login, outside business hours, from an address that had never
+        authenticated before. Neither rule rates that high alone. Together they are the
+        finding worth investigating.
+      </p>
+
+      <div class="stack">
+        <span>Python</span><span>FastAPI</span><span>SQLite</span><span>pytest</span><span>GitHub Actions</span>
       </div>
 
-      <!-- Sales Forecast Dashboard demonstrating predictive analytics -->
-      <div class="project">
-        <h3>Sales Forecast Dashboard</h3>
-        <p>
-          An interactive dashboard that visualises historical sales data and
-          forecasts future performance using a simple linear regression model.
-          Users can see actual and predicted values, demonstrating data
-          analysis and visualisation skills ideal for tech sales roles.
-        </p>
-        <a href="projects/sales-forecast/index.html" class="project-link">Explore the dashboard</a>
+      <div class="links">
+        <a href="projects/authwatch/index.html">Read the write-up &rarr;</a>
+        <a href="https://github.com/aidencampbell7/authwatch">Source on GitHub &rarr;</a>
       </div>
+    </div>
+  </section>
 
-      <!-- Lead Scoring Simulator demonstrating sales analytics -->
-      <div class="project">
-        <h3>Lead Scoring Simulator</h3>
-        <p>
-          A web‑based tool that scores potential leads by asking a few questions
-          about company size, budget, decision timeframe and interest level.
-          It then calculates a weighted score and categorises the lead as
-          hot, warm or cold. The app also visualises the result with an
-          interactive chart, showcasing data‑driven decision‑making.
-        </p>
-        <a href="projects/lead-score/index.html" class="project-link">Try the simulator</a>
-      </div>
+  <!-- ================= SOFTWARE ================= -->
+  <section id="software">
+    <div class="section-head">
+      <span class="eyebrow sw">Track 02 — Software</span>
+      <h2>Data tools and interactive applications</h2>
+      <p>
+        Algorithms implemented from scratch rather than called from a library, each wrapped
+        in an interface you can actually poke at.
+      </p>
+    </div>
 
-      <!-- Sales Funnel Analyzer removed per updated resume -->
+    <div class="grid">
 
-      <!-- Customer Segmentation Explorer showcasing unsupervised learning -->
-      <div class="project">
+      <div class="card">
         <h3>Customer Segmentation Explorer</h3>
         <p>
-          This interactive tool segments customers into clusters based on metrics
-          such as age and annual revenue. You can choose the number of clusters
-          and see a scatter plot of customers coloured by their cluster. The
-          project demonstrates an implementation of the K‑means algorithm in
-          JavaScript and highlights how unsupervised learning can reveal
-          meaningful groups for targeted marketing and sales strategies.
+          A from-scratch implementation of k-means clustering — centroid initialization,
+          iterative assignment, convergence checking. Vary <em>k</em> and watch the segment
+          boundaries move in real time.
         </p>
-        <a href="projects/customer-segmentation/index.html" class="project-link">Try the explorer</a>
+        <div class="stack"><span>JavaScript</span><span>k-means</span></div>
+        <a href="projects/customer-segmentation/index.html">Open the explorer &rarr;</a>
       </div>
 
-      <!-- Customer Sentiment Analysis Dashboard showcasing NLP and data visualisation -->
-      <div class="project">
-        <h3>Customer Sentiment Analysis Dashboard</h3>
+      <div class="card">
+        <h3>Sales Forecast Dashboard</h3>
         <p>
-          This interactive dashboard analyses sample customer reviews using a
-          lexical sentiment algorithm. Reviews are classified as positive,
-          neutral or negative based on the presence of positive and negative
-          keywords. The results are displayed in an interactive bar chart and a
-          summary table, demonstrating natural language processing and data
-          visualisation skills relevant to tech sales.
+          Fits a least-squares linear regression to historical revenue and projects it
+          forward against actuals. The regression is implemented directly rather than
+          pulled from a charting library.
         </p>
-        <a href="projects/sentiment-analysis/index.html" class="project-link">Analyse sentiment</a>
+        <div class="stack"><span>JavaScript</span><span>Chart.js</span><span>regression</span></div>
+        <a href="projects/sales-forecast/index.html">Open the dashboard &rarr;</a>
       </div>
 
-      <!-- Feature Prioritization Tool demonstrating product management -->
-      <div class="project">
-        <h3>Feature Prioritization Tool</h3>
-        <p>
-          A tool for product managers and tech leaders to prioritise new
-          initiatives using the RICE model (Reach × Impact × Confidence ÷ Effort).
-          Add your features, and the app ranks them automatically while
-          displaying an interactive bar chart of the scores.
-        </p>
-        <a href="projects/feature-prioritization/index.html" class="project-link">Prioritise features</a>
-      </div>
-
-      <!-- Cyberpunk Runner demonstrating 3D gaming and physics -->
-      <div class="project">
+      <div class="card">
         <h3>Cyberpunk Runner</h3>
         <p>
-          Dive into a neon‑lit cyberpunk cityscape in this endless runner built
-          with Three.js. Dodge glowing obstacles, collect speed boosts from
-          golden pads and rack up points as the game gets faster. Home and
-          game‑over screens make the experience more polished.
+          An endless runner in a neon cityscape, built with Three.js. Procedural obstacle
+          generation, collision detection, escalating difficulty, and full game-state
+          handling from title screen to game over.
         </p>
-        <a href="projects/cyberpunk-run/index.html" class="project-link">Play the runner</a>
+        <div class="stack"><span>Three.js</span><span>WebGL</span><span>game loop</span></div>
+        <a href="projects/cyberpunk-run/index.html">Play it &rarr;</a>
       </div>
-    </section>
 
-    <section id="resume" class="resume">
+      <div class="card">
+        <h3>Lead Scoring Simulator</h3>
+        <p>
+          A configurable weighted-scoring engine that ranks prospects across budget,
+          timing, and interest, with adjustable feature weights and a visualization layer
+          for comparing outcomes.
+        </p>
+        <div class="stack"><span>JavaScript</span><span>scoring model</span></div>
+        <a href="projects/lead-score/index.html">Try the simulator &rarr;</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= RESUME ================= -->
+  <section id="resume">
+    <div class="section-head">
+      <span class="eyebrow">Background</span>
       <h2>Resume</h2>
-      <h3>Education</h3>
-      <ul>
-        <li>
-          <strong>University of South Carolina</strong> – Bachelor of Science
-          in Computer Science (May 2027); GPA: 3.6
-        </li>
-      </ul>
-      <h3>Related Experience</h3>
-      <ul>
-        <li>
-          <strong>Masters Tournament – Beverage Sales &amp; Analytics</strong>
-          (Apr 2025): Partnered with managers to support bar operations and
-          optimise beverage sales. Assisted in developing upsell strategies that
-          increased average order value, collaborated with vendors and staff
-          to ensure timely restocking and produced sales forecasts and
-          end‑of‑day reports presented to management.
-        </li>
-        <li>
-          <strong>Germantown Academy – IT Department</strong>
-          (Jun 2022 – Sep 2022 &amp; Jun 2023 – Sep 2023): Provisioned laptops
-          and iPads, repaired technology, installed AV equipment and assisted
-          students while collaborating closely with the IT team.
-        </li>
-      </ul>
-      <h3>Leadership Experience</h3>
-      <ul>
-        <li>
-          <strong>Habitat for Humanity – Volunteer</strong> (Jan 2022 – Jun 2022):
-          Assisted in moving, rearranging and selling donated furniture and
-          coordinated volunteers.
-        </li>
-        <li>
-          <strong>Titans Connect – Vice President</strong> (Jan 2022 – Jun 2022):
-          Organized events for students with special needs, planned
-          fundraising activities and helped host a prom.
-        </li>
-      </ul>
-      <!-- Additional experience removed to align with updated resume -->
-      <h3>Activities</h3>
-      <ul>
-        <li>Club Soccer – Captain: Competed nationally in tournaments and leagues.</li>
-        <li>Coding Team – Member: Participated in coding events using Java,
-        JavaScript and Python; built small projects including a GitHub site.</li>
-        <li>National Honors Society – Member: Volunteered while maintaining a high GPA.</li>
-      </ul>
-      <h3>Skills</h3>
-      <ul>
-        <li>Proficient in C++, Java, JavaScript and Python; Microsoft Excel.</li>
-        <li>Basic conversational Spanish.</li>
-      </ul>
-    </section>
+    </div>
 
-    <section id="contact" class="contact">
+    <h3 class="sub">Education</h3>
+    <div class="entry">
+      <div class="entry-head">
+        <h4>University of South Carolina</h4>
+        <span class="when">Expected May 2027</span>
+      </div>
+      <div class="role">B.S. Computer Science &middot; GPA 3.6 &middot; Semester abroad, Barcelona</div>
+      <ul>
+        <li>Data Structures &amp; Algorithms, Operating Systems, Programming Language Structures, Discrete Mathematics</li>
+      </ul>
+    </div>
+
+    <h3 class="sub">Certification</h3>
+    <div class="entry">
+      <div class="entry-head">
+        <h4>CompTIA Security+ (ce)</h4>
+        <span class="when">Jul 2026 &ndash; Jul 2029</span>
+      </div>
+    </div>
+
+    <h3 class="sub">Experience</h3>
+    <div class="entry">
+      <div class="entry-head">
+        <h4>Germantown Academy &mdash; Information Technology</h4>
+        <span class="when">Summers 2022 &amp; 2023</span>
+      </div>
+      <div class="role">IT Support Technician</div>
+      <ul>
+        <li>First point of contact for technology issues across a 1,000+ user campus</li>
+        <li>Built and maintained Windows device images; applied OS and software updates at scale</li>
+        <li>Provisioned and deployed Windows laptops and Apple iPads for campus-wide distribution</li>
+        <li>Documented issues and escalated unresolved incidents with reproduction detail</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head">
+        <h4>Masters Tournament &mdash; Beverage Operations</h4>
+        <span class="when">Apr 2025</span>
+      </div>
+      <div class="role">Barback</div>
+      <ul>
+        <li>Worked extended hours through Tournament week stocking service areas and tracking inventory</li>
+        <li>Guest-facing environment requiring discretion and close coordination with management</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head">
+        <h4>Johnny's Pizzeria</h4>
+        <span class="when">Sep 2022 &ndash; Present</span>
+      </div>
+      <div class="role">Shift Manager</div>
+      <ul>
+        <li>Supervise and train shift staff through peak-volume periods alongside a full course load</li>
+      </ul>
+    </div>
+
+    <h3 class="sub">Leadership</h3>
+    <div class="entry">
+      <div class="entry-head">
+        <h4>Titans Connect</h4>
+        <span class="when">Jan &ndash; Jun 2022</span>
+      </div>
+      <div class="role">Vice President</div>
+      <ul>
+        <li>Organized events and fundraising for students with special needs, including hosting a prom</li>
+      </ul>
+    </div>
+    <div class="entry">
+      <div class="entry-head">
+        <h4>Habitat for Humanity</h4>
+        <span class="when">Jan &ndash; Jun 2022</span>
+      </div>
+      <div class="role">Volunteer</div>
+      <ul>
+        <li>Coordinated volunteers and managed donated furniture operations</li>
+      </ul>
+    </div>
+    <div class="entry">
+      <div class="entry-head">
+        <h4>Club Soccer</h4>
+        <span class="when">&nbsp;</span>
+      </div>
+      <div class="role">Captain &middot; competed nationally in tournaments and leagues</div>
+    </div>
+
+    <h3 class="sub">Skills</h3>
+    <div class="skills">
+      <div><strong>Languages</strong> &nbsp;<span>Python, Java, JavaScript, C++, SQL</span></div>
+      <div><strong>Security</strong> &nbsp;<span>Log analysis, detection rules, IAM, MFA, incident response fundamentals, TCP/IP, DNS, DHCP, VPN</span></div>
+      <div><strong>Systems</strong> &nbsp;<span>Windows imaging and deployment, macOS, iOS/iPadOS, MDM, patching, asset management</span></div>
+      <div><strong>Tools</strong> &nbsp;<span>Git, FastAPI, SQLite, pytest, Chart.js, Three.js, Excel</span></div>
+      <div><strong>Languages spoken</strong> &nbsp;<span>English, conversational Spanish</span></div>
+    </div>
+  </section>
+
+  <!-- ================= CONTACT ================= -->
+  <section id="contact">
+    <div class="section-head">
+      <span class="eyebrow">Get in touch</span>
       <h2>Contact</h2>
-      <p>Email: <a href="mailto:aidenoc@email.sc.edu">aidenoc@email.sc.edu</a></p>
-      <p>Phone: 267‑374‑8962</p>
-    </section>
+      <p>Open to cybersecurity, SOC, GRC, IT support, and software engineering roles.</p>
+    </div>
+    <div class="contact-links">
+      <a href="mailto:aidenoc@email.sc.edu">aidenoc@email.sc.edu</a>
+      <a href="tel:+12673748962">267-374-8962</a>
+      <a href="https://github.com/aidencampbell7">github.com/aidencampbell7</a>
+    </div>
+  </section>
 
-    <footer>
-      <p>&copy; 2025 Aiden Campbell. All rights reserved.</p>
-    </footer>
-  </body>
+</div>
+
+<footer>
+  <div class="wrap">
+    <span>&copy; 2026 Aiden Campbell</span>
+    <span>Columbia, SC</span>
+  </div>
+</footer>
+
+</body>
 </html>
